@@ -6,7 +6,11 @@
 package VistaProyectoFinal;
 
 import Controlador.CtrlLogin;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,10 +18,13 @@ import javax.swing.JOptionPane;
  */
 public class IngresoUsuario extends javax.swing.JFrame {
 
+    FondoPanel4 fondo = new FondoPanel4();
+
     /**
      * Creates new form IngresoUsuario
      */
     public IngresoUsuario() {
+        this.setContentPane(fondo);
         initComponents();
         setLocationRelativeTo(null);
         setSize(280, 235);
@@ -38,17 +45,20 @@ public class IngresoUsuario extends javax.swing.JFrame {
         txtContraseñá = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new FondoPanel4();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ingresar Usuario: ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 60, 101, 16);
+        jLabel1.setBounds(39, 60, 100, 16);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ingresar clave:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(40, 100, 84, 16);
+        jLabel2.setBounds(40, 100, 80, 16);
 
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,11 +83,17 @@ public class IngresoUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(100, 150, 78, 30);
+        jButton1.setBounds(80, 150, 110, 30);
 
-        jLabel4.setText("icono*");
+        jLabel4.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("SISTEMA ACADEMICO GESTOR DE NOTAS ");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(120, 20, 70, 20);
+        jLabel4.setBounds(20, 20, 300, 20);
+
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 330, 220);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -91,24 +107,23 @@ public class IngresoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContraseñáActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         CtrlLogin D = new CtrlLogin();
-       if(D.comprobarCuenta()){
-            if(  D.Autenticacion(txtUsuario.getText(), txtContraseñá.getText())){
-           this.setVisible(false);
-           AgregarAlumnosMateria AM = new AgregarAlumnosMateria();
-           AM.setVisible(true);   
-        }else{
-            JOptionPane.showMessageDialog(null, "Credenciales Incorrectas");
-        }
-       }else{
+        if (D.comprobarCuenta()) {
+            if (D.Autenticacion(txtUsuario.getText(), txtContraseñá.getText())) {
+                this.setVisible(false);
+                AgregarAlumnosMateria AM = new AgregarAlumnosMateria();
+                AM.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Credenciales Incorrectas");
+            }
+        } else {
             this.setVisible(false);
             AgregarAlumnosMateria AM = new AgregarAlumnosMateria();
-            AM.setVisible(true);   
-       }
-       
-       
-    
+            AM.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -146,11 +161,25 @@ public class IngresoUsuario extends javax.swing.JFrame {
         });
     }
 
+    class FondoPanel4 extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics gr) {
+            imagen = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg")).getImage();
+            gr.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(gr);
+
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtContraseñá;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
